@@ -1,0 +1,10 @@
+{
+  "id": "dorsim",
+  "name": "Rideable Dolphins",
+  "authors": [
+    "NarwhalFire"
+  ],
+  "listeners": [
+    "net.scottnotfound.dorsim.Dorsim"
+  ]
+}

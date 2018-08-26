@@ -1,0 +1,51 @@
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://www.dimdev.org/maven/' }
+        maven { url 'http://repo.spongepowered.org/maven' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'org.dimdev:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+        classpath 'gradle.plugin.com.github.breadmoirai:github-release:2.0.1'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.tweaker-client'
+apply plugin: 'java'
+apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.breadmoirai.github-release'
+
+group 'net.scottnotfound'
+version '1.0-SNAPSHOT'
+archivesBaseName = 'dorsim'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://libraries.minecraft.net/' }
+    maven { url 'https://www.dimdev.org/maven/' }
+    maven { url 'https://repo.spongepowered.org/maven/' }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.dimdev:rift:1.0.3-45:dev'
+}
+
+minecraft {
+    version = '1.13'
+    mappings = 'snapshot_5'
+    runDir = 'run'
+    tweakClass = 'org.dimdev.riftloader.launch.RiftLoaderClientTweaker'
+}
+
+mixin {
+    defaultObfuscationEnv notch
+    add sourceSets.main, 'mixins.dorsim.refmap.json'
+}
